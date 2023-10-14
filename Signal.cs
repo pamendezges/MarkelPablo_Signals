@@ -26,6 +26,10 @@ namespace MarkelPablo_Signals
 
         public string IdName { get => idName; set => idName = value; }
 
+        public void RegisterValue()
+        {
+        }
+
         public override string ToString()
         {
             return IdName + " - " + signalType;

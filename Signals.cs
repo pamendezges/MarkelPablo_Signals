@@ -23,8 +23,11 @@ namespace MarkelPablo_Signals
             {
                 signals.Add(signal);
             }
-
-        }
+            else
+            {
+                Console.WriteLine("LAS SEÑALES SON ÚNICAS, NO PUEDES AÑADIR 2 IGUALES");
+            }
+}
 
         public void DeleteSignal(String id)
         {
@@ -71,15 +74,12 @@ namespace MarkelPablo_Signals
         {
             if (id != null)
             {
-
                 bool exists = false;
-
                 for (int i = 0; i < signals.Count() && !exists; i++)
                 {
                     if (signals[i].IdName == id)
                     {
                         Console.WriteLine(signals[i].ToString());
-                        
                     }
                     i++;
                 }
@@ -87,7 +87,6 @@ namespace MarkelPablo_Signals
                 {
                     Console.WriteLine("La señal no se ha encontrado en la lista.");
                 }
-
             }
             else
             {
@@ -103,6 +102,35 @@ namespace MarkelPablo_Signals
                 Console.WriteLine(signals[i].ToString());
                 i++;
             }
+        }
+
+        public int GetSignalIndex(string id, SignalType signalType)
+        {
+            int index = -1;
+            for (int i = 0; i < signals.Count(); i++)
+            {
+                if (signals[i].IdName == id && signals[i].signalType.Equals(signalType))
+                {
+                    index = i;
+                }
+            }
+            return index;
+        }
+
+        public Signal GetSignal(int i)
+        {
+            return signals[i];
+        }
+
+        public void SubstituteSignal(Signal signal, int index)
+        {
+            bool signalExists = signals.Any(s => s.IdName == signal.IdName);
+
+            if (!signalExists)
+            {
+                signals[index] = signal;
+            }
+
         }
 
     }

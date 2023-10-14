@@ -22,6 +22,14 @@ namespace MarkelPablo_Signals
             analogDatas.Add(analogData);
         }
 
+        public void ShowValues()
+        {
+            for (int i = 0; i < analogDatas.Count; i++)
+            {
+                Console.Write(" - " + analogDatas[i].Value + " - ");
+            }
+        }
+
         public override string ToString()
         {
             return IdName + " - " + signalType ;

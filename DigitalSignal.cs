@@ -22,9 +22,17 @@ namespace MarkelPablo_Signals
             digitalDatas.Add(digitalData);
         }
 
+        public void ShowValues()
+        {
+            for (int i = 0; i < digitalDatas.Count; i++)
+            {
+                Console.Write(" - " + digitalDatas[i].Value + " - ");
+            }
+        }
+
         public override string ToString()
         {
-            return IdName + " - " + signalType ;
+            return IdName + " - " + signalType + " " + digitalDatas.ToString();
         }
     }
 }

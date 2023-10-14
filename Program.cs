@@ -30,7 +30,7 @@ namespace MarkelPablo_Signals
                 Console.WriteLine("6) Mostrar una señal por nombre");
                 Console.WriteLine("7) Mostrar una señal por fecha de creacion");
                 Console.WriteLine("0) Salir");
-                menuOption = Convert.ToInt32(Console.ReadLine());
+                menuOption = Convert.ToInt32(Console.ReadLine()); //CONTROLAR EXCEPCIÓN SOLO ENTEROS.
 
                 switch (menuOption)
                 {
@@ -48,12 +48,10 @@ namespace MarkelPablo_Signals
                         signals.DeleteSignal(name);
                         break;
                     case 4:
-                        //deberia de ser registrar valor analogico
-                        AskAnalogParameter(newAnalogSignal);
+                        AddAnalogParameter(signals);
                         break;
                     case 5:
-                        //deberia de ser registrar valor digital
-                        AskDigitalParameter(newDigitalSignal);
+                        AddDigitalParameter(signals);
                         break;
                     case 6:
                         //llama a CallSignalByName();
@@ -94,19 +92,12 @@ namespace MarkelPablo_Signals
             signal.IdName = Console.ReadLine();
         }
 
-        public static void AskAnalogParameter(Signals signal1, string id)
+        public static void AskAnalogParameter(AnalogSignal analogSignal)
         {
-            if (!signal1.AlreadyRegistered(id))
-            {
-                Console.WriteLine("Introduce un valor entero: ");
-                int value = Convert.ToInt32(Console.ReadLine());
-                AnalogData dataAnalog = new AnalogData(value);
-                analogSignal.RegisterValue(dataAnalog);
-            }
-            else
-            {
-                Console.WriteLine("Introduce un nombre que no sea nulo.");
-            }
+            Console.WriteLine("Introduce un entero: ");
+            int value = Convert.ToInt32(Console.ReadLine());
+            AnalogData dataSignal = new AnalogData(value);
+            analogSignal.RegisterValue(dataSignal);
         }
 
         public static void AskDigitalParameter(DigitalSignal digitalSignal)
@@ -115,6 +106,56 @@ namespace MarkelPablo_Signals
             bool value = Convert.ToBoolean(Console.ReadLine());
             DigitalData dataSignal = new DigitalData(value);
             digitalSignal.RegisterValue(dataSignal);
+        }
+
+        public static void AddAnalogParameter(Signals signals)
+        {
+
+            int index ;
+            do
+            {
+                Console.WriteLine("Por favor introduzca el NOMBRE de la señal: ");
+                string signalId = Console.ReadLine();
+                index = signals.GetSignalIndex(signalId, SignalType.Analog);
+                if (index == -1)
+                {
+                    Console.WriteLine("No existe una señal de tipo Analog con ese nombre.");
+                }
+                else
+                {
+                    AnalogSignal signalNew = (AnalogSignal)signals.GetSignal(index);
+                    AskAnalogParameter(signalNew);
+                    signals.SubstituteSignal(signalNew, index);
+                    Console.Write(signalNew.ToString());
+                    signalNew.ShowValues();
+                    Console.WriteLine(" \r\n ");
+                }
+            } while (index ==-1);
+            
+        }
+
+        public static void AddDigitalParameter(Signals signals)
+        {
+            int index;
+            do
+            {
+                Console.WriteLine("Por favor introduzca el NOMBRE de la señal: ");
+                string signalId = Console.ReadLine();
+                index = signals.GetSignalIndex(signalId, SignalType.Digital);
+                if (index == -1)
+                {
+                    Console.WriteLine("No existe una señal de tipo Digital con ese nombre.");
+                }
+                else
+                {
+                    DigitalSignal signalNew = (DigitalSignal)signals.GetSignal(index);
+                    AskDigitalParameter(signalNew);
+                    signals.SubstituteSignal(signalNew, index);
+                    Console.Write(signalNew.ToString());
+                    signalNew.ShowValues();
+                    Console.WriteLine(" \r\n ");
+                }
+            } while (index == -1);
         }
 
     }
