@@ -12,7 +12,7 @@ namespace MarkelPablo_Signals
         public int ReadInt()
         {
             int num = 0;
-            bool esNumero = true;
+            bool isNum = true;
 
             do
             {
@@ -20,41 +20,41 @@ namespace MarkelPablo_Signals
                 {
                     num = Convert.ToInt32(Console.ReadLine());
 
-                    esNumero = true;
+                    isNum = true;
                 }
                 catch (FormatException)
                 {
                     Console.WriteLine("Dato incorrecto, inserta un número, por favor");
-                    esNumero = false;
+                    isNum = false;
                 }
 
-            } while (!esNumero);
+            } while (!isNum);
 
             return num;
         }
 
         public string ReadString()
         {
-            string texto = "";
-            bool esCadena = true;
+            string text = "";
+            bool isString = true;
 
             do
             {
                 try
                 {
-                    texto = Console.ReadLine();
+                    text = Console.ReadLine();
 
-                    esCadena = true;
+                    isString = true;
                 }
                 catch (FormatException)
                 {
                     Console.WriteLine("Dato incorrecto, inserta una cadena de texto, por favor");
-                    esCadena = false;
+                    isString = false;
                 }
 
-            } while (!esCadena);
+            } while (!isString);
 
-            return texto;
+            return text;
         }
 
         public bool ReadBool()

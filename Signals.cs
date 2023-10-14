@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MarkelPablo_Signals
 {
-    class Signals
+    class Signals : SignalsManagement
     {
         List<Signal> signals = new List<Signal>();
 
@@ -29,7 +29,7 @@ namespace MarkelPablo_Signals
             }
 }
 
-        public void DeleteSignal(String id)
+        public void DeleteSignal(string id)
         {
             if (id != null)
             {
@@ -55,7 +55,7 @@ namespace MarkelPablo_Signals
             }
         }
 
-        public bool AlreadyRegistered(String id)
+        public bool AlreadyRegistered(string id)
         {
             bool signalExists = signals.Any(s => s.IdName == id);
             if (signalExists == true)
@@ -69,7 +69,7 @@ namespace MarkelPablo_Signals
             }
         }
 
-        public void CallSignalByName(String id)
+        public void CallSignalByName(string id)
         {
             if (id != null)
             {
@@ -133,7 +133,7 @@ namespace MarkelPablo_Signals
             }
         }
 
-        public void mostrarCadena()
+        public void PrintList()
         {
             int i = 0;
             while (i < signals.Count)
@@ -156,12 +156,12 @@ namespace MarkelPablo_Signals
             return index;
         }
 
-        public Signal GetSignal(int i)
+        public Signal GetSignal(int index)
         {
-            return signals[i];
+            return signals[index];
         }
 
-        public void SubstituteSignal(Signal signal, int index)
+        public void ReplaceSignal(Signal signal, int index)
         {
             bool signalExists = signals.Any(s => s.IdName == signal.IdName);
 

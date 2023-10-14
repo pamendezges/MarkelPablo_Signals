@@ -41,12 +41,12 @@ namespace MarkelPablo_Signals
                 {
                     case 1:
                         CreateSignalAnalog(signals);
-                        signals.mostrarCadena();
+                        signals.PrintList();
                         Console.WriteLine(" \r\n ");
                         break;
                     case 2:
                         CreateSignalDigital(signals);
-                        signals.mostrarCadena();
+                        signals.PrintList();
                         Console.WriteLine(" \r\n ");
                         break;
                     case 3:
@@ -144,7 +144,7 @@ namespace MarkelPablo_Signals
                 {
                     AnalogSignal signalNew = (AnalogSignal)signals.GetSignal(index);
                     AskAnalogParameter(signalNew);
-                    signals.SubstituteSignal(signalNew, index);
+                    signals.ReplaceSignal(signalNew, index);
                     Console.Write(signalNew.ToString());
                     signalNew.ShowValues();
                     Console.WriteLine(" \r\n ");
@@ -170,7 +170,7 @@ namespace MarkelPablo_Signals
                 {
                     DigitalSignal signalNew = (DigitalSignal)signals.GetSignal(index);
                     AskDigitalParameter(signalNew);
-                    signals.SubstituteSignal(signalNew, index);
+                    signals.ReplaceSignal(signalNew, index);
                     Console.Write(signalNew.ToString());
                     signalNew.ShowValues();
                     Console.WriteLine(" \r\n ");
