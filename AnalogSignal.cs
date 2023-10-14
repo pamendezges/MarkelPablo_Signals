@@ -17,6 +17,11 @@ namespace MarkelPablo_Signals
             analogDatas = new List<AnalogData>();
         }
 
+        public void RegisterValue(AnalogData analogData)
+        {
+            analogDatas.Add(analogData);
+        }
+
         public override string ToString()
         {
             return IdName + " - " + signalType ;

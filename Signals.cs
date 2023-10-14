@@ -53,6 +53,20 @@ namespace MarkelPablo_Signals
             }
         }
 
+        public bool AlreadyRegistered(String id)
+        {
+            bool signalExists = signals.Any(s => s.IdName == id);
+            if (signalExists == true)
+            {
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("No puedes añadir valores a una señal no registrada.");
+                return false;
+            }
+        }
+
         public void CallSignalByName(String id)
         {
             if (id != null)

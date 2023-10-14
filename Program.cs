@@ -25,9 +25,10 @@ namespace MarkelPablo_Signals
                 Console.WriteLine("1) Añadir una señal analogica");
                 Console.WriteLine("2) Añadir una señal digital");
                 Console.WriteLine("3) Borrar una señal");
-                Console.WriteLine("4) Guardar señales en archivo");
-                Console.WriteLine("5) Mostrar una señal por nombre");
-                Console.WriteLine("6) Mostrar una señal por fecha de creacion");
+                Console.WriteLine("4) Registrar valor analogico");
+                Console.WriteLine("5) Registrar valor digital");
+                Console.WriteLine("6) Mostrar una señal por nombre");
+                Console.WriteLine("7) Mostrar una señal por fecha de creacion");
                 Console.WriteLine("0) Salir");
                 menuOption = Convert.ToInt32(Console.ReadLine());
 
@@ -47,16 +48,25 @@ namespace MarkelPablo_Signals
                         signals.DeleteSignal(name);
                         break;
                     case 4:
-                        //llama a saveSignalFile();
+                        //deberia de ser registrar valor analogico
+                        AskAnalogParameter(newAnalogSignal);
                         break;
                     case 5:
-                        //llama a CallSignalByName();
+                        //deberia de ser registrar valor digital
+                        AskDigitalParameter(newDigitalSignal);
                         break;
                     case 6:
+                        //llama a CallSignalByName();
+                        break;
+                    case 7:
                         //llama a CallSignalByTime();
                         break;
                     case 0:
                         Environment.Exit(0);
+                        break;
+                    default: 
+                        Console.WriteLine("ESCOJA UNA DE LAS OPCIONES DISPONIBLES, POR FAVOR"); 
+                        Console.Read(); 
                         break;
                 }
             } while (menuOption != 0);
@@ -84,18 +94,27 @@ namespace MarkelPablo_Signals
             signal.IdName = Console.ReadLine();
         }
 
-        public static void AskAnalogParameter(AnalogSignal analogSignal)
+        public static void AskAnalogParameter(Signals signal1, string id)
         {
-            Console.WriteLine("Introduce un valor entero: ");
-            analogSignal.Value = Convert.ToInt32(Console.ReadLine());
-            analogSignal.signalType = SignalType.Analog;
+            if (!signal1.AlreadyRegistered(id))
+            {
+                Console.WriteLine("Introduce un valor entero: ");
+                int value = Convert.ToInt32(Console.ReadLine());
+                AnalogData dataAnalog = new AnalogData(value);
+                analogSignal.RegisterValue(dataAnalog);
+            }
+            else
+            {
+                Console.WriteLine("Introduce un nombre que no sea nulo.");
+            }
         }
 
         public static void AskDigitalParameter(DigitalSignal digitalSignal)
         {
             Console.WriteLine("Introduce un valor 'true' o 'false': ");
-            digitalSignal.Value = Convert.ToBoolean(Console.ReadLine());
-            digitalSignal.signalType = SignalType.Digital;
+            bool value = Convert.ToBoolean(Console.ReadLine());
+            DigitalData dataSignal = new DigitalData(value);
+            digitalSignal.RegisterValue(dataSignal);
         }
 
     }
