@@ -42,7 +42,6 @@ namespace MarkelPablo_Signals
                         signals.RemoveAt(i);
                         exists = true;
                     }
-                    i++;
                 }
                 if (!exists)
                 {

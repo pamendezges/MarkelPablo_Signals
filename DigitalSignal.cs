@@ -39,8 +39,6 @@ namespace MarkelPablo_Signals
                     Console.Write(ToString());
                     Console.WriteLine(" - " + digitalDatas[i].Value + "(" + digitalDatas[i].TimeStamp + ")");
                 }
-
-
             }
         }
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,13 +13,16 @@ namespace MarkelPablo_Signals
         public static void Main(string[] args)
         {
             Signals signals1 = new Signals();
+            
 
             menu(signals1);
         }
 
         public static void menu(Signals signals)
         {
-            int menuOption;
+            Validations validate = new Validations();
+
+            int menuOption = 0;
             do
             {
                 Console.WriteLine("Este es el menu principal, seleccione una opcion por favor:");
@@ -30,7 +34,8 @@ namespace MarkelPablo_Signals
                 Console.WriteLine("6) Mostrar una señal por nombre");
                 Console.WriteLine("7) Mostrar una señal por fecha de creacion");
                 Console.WriteLine("0) Salir");
-                menuOption = Convert.ToInt32(Console.ReadLine()); //CONTROLAR EXCEPCIÓN SOLO ENTEROS.
+                Console.WriteLine("Introduzca una opción: ");
+                menuOption = validate.ReadInt();
 
                 switch (menuOption)
                 {
@@ -45,8 +50,9 @@ namespace MarkelPablo_Signals
                         Console.WriteLine(" \r\n ");
                         break;
                     case 3:
+                        string name = "";
                         Console.WriteLine("Introduce el idName de la señal que quiere borrar:");
-                        string name = Console.ReadLine();
+                        name = validate.ReadString();
                         signals.DeleteSignal(name);
                         Console.WriteLine(" \r\n ");
                         break;
@@ -57,8 +63,9 @@ namespace MarkelPablo_Signals
                         AddDigitalParameter(signals);
                         break;
                     case 6:
+                        string name1 = "";
                         Console.WriteLine("Introduce el idName del sensor para visualizar sus datos:");
-                        string name1 = Console.ReadLine();
+                        name1 = validate.ReadString();
                         signals.CallSignalByName(name1);
                         break;
                     case 7:
@@ -97,34 +104,37 @@ namespace MarkelPablo_Signals
 
         public static void AskCommonParameters(Signal signal)
         {
+            Validations validate = new Validations();
             Console.WriteLine("Por favor introduzca el nombre de la señal: ");
-            signal.IdName = Console.ReadLine();
+            signal.IdName = validate.ReadString();
         }
 
         public static void AskAnalogParameter(AnalogSignal analogSignal)
         {
+            Validations validate = new Validations();
             Console.WriteLine("Introduce un entero: ");
-            int value = Convert.ToInt32(Console.ReadLine());
+            int value = validate.ReadInt();
             AnalogData dataSignal = new AnalogData(value);
             analogSignal.RegisterValue(dataSignal);
         }
 
         public static void AskDigitalParameter(DigitalSignal digitalSignal)
         {
+            Validations validate = new Validations();
             Console.WriteLine("Introduce un valor 'true' o 'false': ");
-            bool value = Convert.ToBoolean(Console.ReadLine());
+            bool value = validate.ReadBool();
             DigitalData dataSignal = new DigitalData(value);
             digitalSignal.RegisterValue(dataSignal);
         }
 
         public static void AddAnalogParameter(Signals signals)
         {
-
+            Validations validate = new Validations();
             int index ;
             do
             {
                 Console.WriteLine("Por favor introduzca el NOMBRE de la señal: ");
-                string signalId = Console.ReadLine();
+                string signalId = validate.ReadString();
                 index = signals.GetSignalIndex(signalId, SignalType.Analog);
                 if (index == -1)
                 {
@@ -145,11 +155,12 @@ namespace MarkelPablo_Signals
 
         public static void AddDigitalParameter(Signals signals)
         {
+            Validations validate = new Validations();
             int index;
             do
             {
                 Console.WriteLine("Por favor introduzca el NOMBRE de la señal: ");
-                string signalId = Console.ReadLine();
+                string signalId = validate.ReadString();
                 index = signals.GetSignalIndex(signalId, SignalType.Digital);
                 if (index == -1)
                 {
