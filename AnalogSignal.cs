@@ -26,7 +26,21 @@ namespace MarkelPablo_Signals
         {
             for (int i = 0; i < analogDatas.Count; i++)
             {
-                Console.Write(" - " + analogDatas[i].Value + " - ");
+                Console.Write(" - " + analogDatas[i].Value + "(" + analogDatas[i].TimeStamp + ")");
+            }
+        }
+
+        public void ShowValuesIfDates(DateTime timeStart, DateTime timeEnd)
+        {
+            for (int i = 0; i < analogDatas.Count; i++)
+            {
+                if (analogDatas[i].TimeStamp >= timeStart && analogDatas[i].TimeStamp <= timeEnd)
+                {
+                    Console.Write(ToString());
+                    Console.WriteLine(" - " + analogDatas[i].Value + "(" + analogDatas[i].TimeStamp + ")");
+                }
+
+
             }
         }
 

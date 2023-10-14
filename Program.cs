@@ -37,15 +37,18 @@ namespace MarkelPablo_Signals
                     case 1:
                         CreateSignalAnalog(signals);
                         signals.mostrarCadena();
+                        Console.WriteLine(" \r\n ");
                         break;
                     case 2:
                         CreateSignalDigital(signals);
                         signals.mostrarCadena();
+                        Console.WriteLine(" \r\n ");
                         break;
                     case 3:
                         Console.WriteLine("Introduce el idName de la señal que quiere borrar:");
                         string name = Console.ReadLine();
                         signals.DeleteSignal(name);
+                        Console.WriteLine(" \r\n ");
                         break;
                     case 4:
                         AddAnalogParameter(signals);
@@ -54,10 +57,16 @@ namespace MarkelPablo_Signals
                         AddDigitalParameter(signals);
                         break;
                     case 6:
-                        //llama a CallSignalByName();
+                        Console.WriteLine("Introduce el idName del sensor para visualizar sus datos:");
+                        string name1 = Console.ReadLine();
+                        signals.CallSignalByName(name1);
                         break;
                     case 7:
-                        //llama a CallSignalByTime();
+                        Console.Write("Ingrese la fecha y hora de inicio (yyyy-MM-dd HH:mm:ss): ");
+                        DateTime fechaInicio = DateTime.Parse(Console.ReadLine());
+                        Console.Write("Ingrese la fecha y hora de fin (yyyy-MM-dd HH:mm:ss): ");
+                        DateTime fechaFin = DateTime.Parse(Console.ReadLine());
+                        signals.CallSignalByTime(fechaInicio, fechaFin);
                         break;
                     case 0:
                         Environment.Exit(0);

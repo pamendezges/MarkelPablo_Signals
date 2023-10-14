@@ -79,13 +79,53 @@ namespace MarkelPablo_Signals
                 {
                     if (signals[i].IdName == id)
                     {
-                        Console.WriteLine(signals[i].ToString());
+                        if (signals[i].signalType.Equals(SignalType.Analog))
+                        {
+                            AnalogSignal signal = (AnalogSignal)signals[i];
+                            Console.Write("DATOS: " + signal.ToString());
+                            signal.ShowValues();
+                            Console.WriteLine(" \r\n ");
+                        }
+                        else if (signals[i].signalType.Equals(SignalType.Digital))
+                        {
+                            DigitalSignal signal = (DigitalSignal)signals[i];
+                            Console.Write(signal.ToString());
+                            signal.ShowValues();
+                            Console.WriteLine(" \r\n ");
+                        }
+                        exists = true;
                     }
-                    i++;
                 }
                 if (!exists)
                 {
                     Console.WriteLine("La señal no se ha encontrado en la lista.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Introduce un nombre que no sea nulo.");
+            }
+        }
+
+        public void CallSignalByTime(DateTime timeStart, DateTime timeEnd)
+        {
+            if (timeStart != null && timeEnd != null)
+            {
+                bool exists = false;
+                for (int i = 0; i < signals.Count() && !exists; i++)
+                {
+                    if (signals[i].signalType.Equals(SignalType.Analog))
+                    {
+                        AnalogSignal signal = (AnalogSignal)signals[i];
+                        signal.ShowValuesIfDates(timeStart, timeEnd);
+                        Console.WriteLine(" \r\n ");
+                    }
+                    else if (signals[i].signalType.Equals(SignalType.Digital))
+                    {
+                        DigitalSignal signal = (DigitalSignal)signals[i];
+                        signal.ShowValuesIfDates(timeStart, timeEnd);
+                        Console.WriteLine(" \r\n ");
+                    }
                 }
             }
             else

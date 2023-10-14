@@ -30,6 +30,10 @@ namespace MarkelPablo_Signals
         {
         }
 
+        public void ShowValues()
+        {
+        }
+
         public override string ToString()
         {
             return IdName + " - " + signalType;

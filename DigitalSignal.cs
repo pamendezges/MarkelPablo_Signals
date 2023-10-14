@@ -26,13 +26,27 @@ namespace MarkelPablo_Signals
         {
             for (int i = 0; i < digitalDatas.Count; i++)
             {
-                Console.Write(" - " + digitalDatas[i].Value + " - ");
+                Console.Write(" - " + digitalDatas[i].Value + "(" + digitalDatas[i].TimeStamp + ")");
+            }
+        }
+
+        public void ShowValuesIfDates(DateTime timeStart, DateTime timeEnd)
+        {
+            for (int i = 0; i < digitalDatas.Count; i++)
+            {
+                if (digitalDatas[i].TimeStamp >= timeStart && digitalDatas[i].TimeStamp <= timeEnd)
+                {
+                    Console.Write(ToString());
+                    Console.WriteLine(" - " + digitalDatas[i].Value + "(" + digitalDatas[i].TimeStamp + ")");
+                }
+
+
             }
         }
 
         public override string ToString()
         {
-            return IdName + " - " + signalType + " " + digitalDatas.ToString();
+            return IdName + " - " + signalType ;
         }
     }
 }
