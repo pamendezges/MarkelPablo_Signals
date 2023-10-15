@@ -42,6 +42,36 @@ namespace MarkelPablo_Signals
             }
         }
 
+        public void CalculateAverage()
+        {
+            int numTrue = 0;
+            int numFalse = 0;
+
+            for (int i = 0; i < digitalDatas.Count; i++)
+            {
+                if (digitalDatas[i].Value.Equals(true))
+                {
+                    numTrue++;
+                } 
+                else if (digitalDatas[i].Value.Equals(false))
+                {
+                    numFalse++;
+                }
+            }
+            if (numTrue == numFalse)
+            {
+                Console.WriteLine("Se ha registrado true y false el mismo número de veces");
+            } 
+            else if (numTrue>numFalse)
+            {
+                Console.WriteLine("El valor con más registros ha sido el true con " + numTrue + " registros.");
+            }
+            else if (numTrue < numFalse)
+            {
+                Console.WriteLine("El valor con más registros ha sido el false con " + numFalse + " registros.");
+            }
+        }
+
         public override string ToString()
         {
             return IdName + " - " + signalType ;

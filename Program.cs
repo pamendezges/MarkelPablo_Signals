@@ -21,6 +21,7 @@ namespace MarkelPablo_Signals
         public static void menu(Signals signals)
         {
             Validations validate = new Validations();
+            DataOperations dataOperations = new DataOperations();
 
             int menuOption = 0;
             do
@@ -33,6 +34,8 @@ namespace MarkelPablo_Signals
                 Console.WriteLine("5) Registrar valor digital");
                 Console.WriteLine("6) Mostrar una señal por nombre");
                 Console.WriteLine("7) Mostrar una señal por fecha de creacion");
+                Console.WriteLine("8) Operaciones específicas");
+                Console.WriteLine("9) Volcado a fichero");
                 Console.WriteLine("0) Salir");
                 Console.WriteLine("Introduzca una opción: ");
                 menuOption = validate.ReadInt();
@@ -74,6 +77,12 @@ namespace MarkelPablo_Signals
                         Console.Write("Ingrese la fecha y hora de fin (yyyy-MM-dd HH:mm:ss): ");
                         DateTime fechaFin = DateTime.Parse(Console.ReadLine());
                         signals.CallSignalByTime(fechaInicio, fechaFin);
+                        break;
+                    case 8:
+                        dataOperations.SecondaryMenu(signals);
+                        break;
+                    case 9:
+                        //volcado a fichero
                         break;
                     case 0:
                         Environment.Exit(0);

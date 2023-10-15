@@ -39,9 +39,33 @@ namespace MarkelPablo_Signals
                     Console.Write(ToString());
                     Console.WriteLine(" - " + analogDatas[i].Value + "(" + analogDatas[i].TimeStamp + ")");
                 }
-
-
             }
+        }
+
+        public void CalculateAverage()
+        {
+            int sumValores = 0;
+            double average = 0;
+
+            for (int i = 0; i < analogDatas.Count; i++)
+            {
+                sumValores += analogDatas[i].Value; 
+            }
+            average = sumValores / analogDatas.Count;
+            Console.WriteLine("La media de los registros es: " + average + " unidades.");
+        }
+
+        public int GetMaxValue()
+        {
+            int maxValue = 0;
+            for (int i = 0; i < analogDatas.Count; i++)
+            {
+                if (analogDatas[i].Value > maxValue)
+                {
+                    maxValue = analogDatas[i].Value;
+                }
+            }
+            return maxValue;
         }
 
         public override string ToString()

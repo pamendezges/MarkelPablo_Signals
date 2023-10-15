@@ -172,5 +172,63 @@ namespace MarkelPablo_Signals
 
         }
 
+        public void AverageValue(string id)
+        {
+            if (id != null)
+            {
+                bool exists = false;
+                for (int i = 0; i < signals.Count() && !exists; i++)
+                {
+                    if (signals[i].IdName == id)
+                    {
+                        if (signals[i].signalType.Equals(SignalType.Analog))
+                        {
+                            AnalogSignal signal = (AnalogSignal)signals[i];
+                            signal.CalculateAverage();
+                            Console.WriteLine(" \r\n ");
+                        }
+                        else if (signals[i].signalType.Equals(SignalType.Digital))
+                        {
+                            DigitalSignal signal = (DigitalSignal)signals[i];
+                            signal.CalculateAverage();
+                            Console.WriteLine(" \r\n ");
+                        }
+                        exists = true;
+                    }
+                }
+                if (!exists)
+                {
+                    Console.WriteLine("La señal no se ha encontrado en la lista.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Introduce un nombre que no sea nulo.");
+            }
+        }
+
+        public void MaxValueSignal()
+        {
+            int maxValueIndex = 0;
+            int maxValue = 0;
+            string maxValueSignal = "";
+
+            for (int i = 0; i < signals.Count(); i++)
+            {
+                int temp = 0;
+                if (signals[i].signalType.Equals(SignalType.Analog))
+                {
+                    AnalogSignal signal = (AnalogSignal)signals[i];
+                    temp = signal.GetMaxValue();
+                    if (temp > maxValue)
+                    {
+                        maxValue = temp;
+                        maxValueIndex = i;
+                    }
+                }
+            }
+            Console.WriteLine(signals[maxValueIndex].ToString() + " VALOR MÁXIMO = " + maxValue);
+            Console.WriteLine(" \r\n ");
+        }
     }
 }

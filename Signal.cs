@@ -34,6 +34,10 @@ namespace MarkelPablo_Signals
         {
         }
 
+        public void CalculateAverage()
+        {
+        }
+
         public override string ToString()
         {
             return IdName + " - " + signalType;
