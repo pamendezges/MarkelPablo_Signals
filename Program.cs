@@ -22,6 +22,7 @@ namespace MarkelPablo_Signals
         {
             Validations validate = new Validations();
             DataOperations dataOperations = new DataOperations();
+            FileManagement file = new FileManagement();
 
             int menuOption = 0;
             do
@@ -46,24 +47,29 @@ namespace MarkelPablo_Signals
                         CreateSignalAnalog(signals);
                         signals.PrintList();
                         Console.WriteLine(" \r\n ");
+                        signals.FileSaving(file);
                         break;
                     case 2:
                         CreateSignalDigital(signals);
                         signals.PrintList();
                         Console.WriteLine(" \r\n ");
+                        signals.FileSaving(file);
                         break;
                     case 3:
                         string name = "";
                         Console.WriteLine("Introduce el idName de la señal que quiere borrar:");
                         name = validate.ReadString();
                         signals.DeleteSignal(name);
+                        signals.FileSaving(file);
                         Console.WriteLine(" \r\n ");
                         break;
                     case 4:
                         AddAnalogParameter(signals);
+                        signals.FileSaving(file);
                         break;
                     case 5:
                         AddDigitalParameter(signals);
+                        signals.FileSaving(file);
                         break;
                     case 6:
                         string name1 = "";
@@ -82,7 +88,7 @@ namespace MarkelPablo_Signals
                         dataOperations.SecondaryMenu(signals);
                         break;
                     case 9:
-                        //volcado a fichero
+                        signals.FileSaving(file);
                         break;
                     case 0:
                         Environment.Exit(0);

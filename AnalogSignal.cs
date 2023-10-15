@@ -30,6 +30,16 @@ namespace MarkelPablo_Signals
             }
         }
 
+        public string GetValues()
+        {
+            string values = ToString(); 
+            for (int i = 0; i < analogDatas.Count; i++)
+            {
+                values +=(" - " + analogDatas[i].Value + "(" + analogDatas[i].TimeStamp + ")");
+            }
+            return values;
+        }
+
         public void ShowValuesIfDates(DateTime timeStart, DateTime timeEnd)
         {
             for (int i = 0; i < analogDatas.Count; i++)

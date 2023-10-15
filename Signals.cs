@@ -117,15 +117,14 @@ namespace MarkelPablo_Signals
                     {
                         AnalogSignal signal = (AnalogSignal)signals[i];
                         signal.ShowValuesIfDates(timeStart, timeEnd);
-                        Console.WriteLine(" \r\n ");
                     }
                     else if (signals[i].signalType.Equals(SignalType.Digital))
                     {
                         DigitalSignal signal = (DigitalSignal)signals[i];
                         signal.ShowValuesIfDates(timeStart, timeEnd);
-                        Console.WriteLine(" \r\n ");
                     }
                 }
+                Console.WriteLine(" \r\n ");
             }
             else
             {
@@ -230,5 +229,11 @@ namespace MarkelPablo_Signals
             Console.WriteLine(signals[maxValueIndex].ToString() + " VALOR MÁXIMO = " + maxValue);
             Console.WriteLine(" \r\n ");
         }
+
+        public void FileSaving(FileManagement file)
+        {
+            file.SaveToFile(signals);
+        }
+
     }
 }

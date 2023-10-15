@@ -34,6 +34,11 @@ namespace MarkelPablo_Signals
         {
         }
 
+        public string GetValues()
+        {
+            return idName;
+        }
+
         public void CalculateAverage()
         {
         }
