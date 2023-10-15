@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MarkelPablo_Signals
 {
-    class DataOperations : DataManagement
+    class DataOperations
     {
         public void SecondaryMenu(Signals signals)
         {
